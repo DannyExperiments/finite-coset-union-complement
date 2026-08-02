@@ -1,8 +1,10 @@
 cff-version: 1.2.0
 message: "If you use this research release, cite it using the metadata below."
-title: "A rank method for complements of finite coset unions"
+title: "A Rank Method for Complements of Finite Coset Unions"
 type: software
-version: 1.0.0
+version: 1.0.1
+date-released: 2026-08-02
+doi: "10.5281/zenodo.21762470"
 repository-code: "https://github.com/DannyExperiments/finite-coset-union-complement"
 authors:
   - name: "DannyExperiments"
@@ -12,7 +14,8 @@ preferred-citation:
   authors:
     - name: "DannyExperiments"
   year: 2026
-  url: "https://github.com/DannyExperiments/finite-coset-union-complement"
+  doi: "10.5281/zenodo.21762471"
+  url: "https://github.com/DannyExperiments/finite-coset-union-complement/releases/tag/v1.0.1"
 keywords:
   - finite groups
   - cosets
