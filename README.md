@@ -3,6 +3,7 @@
 [![Repository verification](https://github.com/DannyExperiments/finite-coset-union-complement/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/finite-coset-union-complement/actions/workflows/verify.yml)
 [![Lean verification](https://github.com/DannyExperiments/finite-coset-union-complement/actions/workflows/lean.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/finite-coset-union-complement/actions/workflows/lean.yml)
 [![PDF build](https://github.com/DannyExperiments/finite-coset-union-complement/actions/workflows/pdf.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/finite-coset-union-complement/actions/workflows/pdf.yml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21762470.svg)](https://doi.org/10.5281/zenodo.21762470)
 
 [Paper (PDF)](paper/manuscript.pdf) ·
 [Complete proof](proof/PROBLEM_AND_PROOF.md) ·
@@ -119,3 +120,11 @@ The accepted Version 2.2 manuscript is installed and independently audited.
 The repository records a solver-authored proposed solution, not journal
 acceptance or human peer review. Human specialist review was not obtained,
 and absolute historical priority is not claimed.
+
+## Citation
+
+For a stable citation to this repository, use the concept DOI
+[10.5281/zenodo.21762470](https://doi.org/10.5281/zenodo.21762470). The exact archived
+release `v1.0.1` is [10.5281/zenodo.21762471](https://doi.org/10.5281/zenodo.21762471). GitHub's
+**Cite this repository** menu reads the machine-readable metadata in
+[`CITATION.cff`](CITATION.cff).
