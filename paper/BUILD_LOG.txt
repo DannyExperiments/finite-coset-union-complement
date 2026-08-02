@@ -1,0 +1,94 @@
+KOUROVKA 21.115 VERSION 2.2 — VERIFIED BUILD LOG
+Build date: 2026-08-02
+Build mode: fresh temporary directory
+Deterministic environment: SOURCE_DATE_EPOCH=1785628800; FORCE_SOURCE_DATE=1
+
+IMMUTABLE VERSION 2.1 BASELINE
+Archive SHA-256:
+  88429e9a89c7e56285ac9eae575e8ae5d036646322071632d8b9ef7518d5e109
+Outer checksum: PASS
+ZIP integrity: PASS
+Complete internal SHA256SUMS ledger: PASS
+Baseline mutation: NONE
+
+SOURCE INPUT HASHES
+manuscript.tex  192c233a864659aa8b639add41246d838298c1e79ad975bfcd340160265e5745
+references.bib  11a8a133e32dad5d62f0bc3ea65bac7045d6cb53ab13a0d88987841086d8e792
+
+BASELINE SOURCE HASH
+Version 2.1 manuscript.tex
+  19ef16e63b4ad85a387872909d93459fa006171fdaa55d0db7ceb17a01c13f1a
+
+TOOLCHAIN
+pdfTeX 3.141592653-2.6-1.40.26 (TeX Live 2025/dev/Debian)
+Biber 2.20
+Python 3.13.5
+Ghostscript 10.05.1
+Poppler 25.06.0
+
+COMMAND SEQUENCE
+1. pdflatex -interaction=nonstopmode -halt-on-error -file-line-error manuscript.tex
+   exit status: 0
+2. biber manuscript
+   exit status: 0
+3. pdflatex -interaction=nonstopmode -halt-on-error -file-line-error manuscript.tex
+   exit status: 0
+4. pdflatex -interaction=nonstopmode -halt-on-error -file-line-error manuscript.tex
+   exit status: 0
+5. pdflatex -interaction=nonstopmode -halt-on-error -file-line-error manuscript.tex
+   exit status: 0
+
+FINAL BUILD CHECKS
+- LaTeX warnings: 0.
+- Package warnings: 0.
+- Class warnings: 0.
+- pdfTeX warnings: 0.
+- Undefined references or citations: 0.
+- Multiply defined labels: 0.
+- Overfull boxes: 0.
+- Underfull boxes: 0.
+- Biber warnings or errors: 0.
+- Rerun warnings: 0.
+- Ghostscript full-document interpretation: PASS.
+- PyMuPDF and Poppler open/extract checks: PASS.
+- PDFium rendering: PASS, 9/9 pages at 200 DPI.
+- Poppler rendering: PASS, 9/9 pages at 200 DPI.
+- Visual inspection: PASS, all 9 pages.
+- Second fresh deterministic rebuild: PASS; PDF byte-identical.
+
+EXACT SOURCE RECONCILIATION
+- Version 2.2 minus only the inserted section equals Version 2.1 byte-for-byte: PASS.
+- Theorem-like statements unchanged: PASS, 18/18.
+- Extracted mathematical spans unchanged: PASS, 389/389.
+- Labels unchanged and unique: PASS, 18/18.
+- Citation signatures unchanged: PASS, 19/19.
+- Bibliography entries unchanged: PASS, 21/21.
+- verify_small_groups.py unchanged: PASS.
+- Existing formalization-status paragraph unchanged: PASS.
+- Author command count: 0.
+
+EXACT FINITE VERIFIER
+Fresh replay ended with:
+  families_examined=29505
+  proper_unions_examined=28773
+  equality_cases_checked_as_cosets=3070
+  all_assertions=PASS
+Fresh output byte-identical to VERIFIER_LOG.txt: PASS
+
+FINAL PDF
+SHA-256:
+  6c82c218005037974992d9704324df8e17ea9df19e9b5cc79675be0be6cf96e9
+Size: 371572 bytes
+Pages: 9
+Page size: A4, 595.276 x 841.89 points
+PDF author metadata: empty
+Encryption: none
+Creation/modification timestamp: 2026-08-02 00:00:00 UTC
+
+RAW RECORDS
+Current compiler/Biber outputs, logs, scans, source-comparison records,
+PDF metadata, font inventory, render records, and visual-inspection record are
+under BUILD_RECORDS_V2_2/. Inherited Version 2.1 build records remain unchanged
+under BUILD_RECORDS/.
+
+BUILD_VERDICT: PASS

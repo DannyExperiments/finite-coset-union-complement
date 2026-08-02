@@ -1,0 +1,19 @@
+.DS_Store
+**/.DS_Store
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+formalization/.lake/
+tmp/
+output/
+
+# The canonical manuscript PDF is intentionally tracked.
+!paper/manuscript.pdf
+

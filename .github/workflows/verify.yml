@@ -1,0 +1,20 @@
+name: Verify public artifacts
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Verify checksums, manuscript, disclosures, Lean source hygiene, and finite regression log
+        run: ./scripts/verify.sh

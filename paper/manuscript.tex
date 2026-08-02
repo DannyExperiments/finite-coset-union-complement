@@ -1,0 +1,698 @@
+\documentclass[11pt,a4paper]{amsart}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[nameinlink,capitalise,noabbrev]{cleveref}
+\usepackage[backend=biber,style=alphabetic,maxnames=99]{biblatex}
+\addbibresource{references.bib}
+\emergencystretch=2em
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!45!black,
+  citecolor=green!35!black,
+  urlcolor=blue!55!black,
+  pdftitle={A Rank Method for Complements of Finite Coset Unions},
+  pdfsubject={Kourovka Notebook Problem 21.115 and compatible-block refinements}
+}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{question}[theorem]{Question}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\supp}{\operatorname{supp}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\mr}{\operatorname{mr}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\core}{\operatorname{core}}
+\newcommand{\Had}{\mathbin{\circ}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\one}{\mathbf{1}}
+
+\title{A Rank Method for Complements of Finite Coset Unions}
+\date{2 August 2026}
+\subjclass[2020]{20D60, 05B40, 15A03}
+\keywords{finite group, subgroup coset, coset union, Hadamard product, matrix rank, exact-support rank}
+
+\begin{document}
+\begin{abstract}
+We prove an affirmative answer to Kourovka Notebook Problem 21.115: if
+$C_1,\ldots,C_n$ are arbitrary independently left or right cosets, possibly of
+different nonnormal subgroups of a finite group $G$, and
+$G\setminus\bigcup_i C_i$ is nonempty, then it has size at least $|G|/2^n$.
+The proof constructs rank-two matrices whose Hadamard product has exactly the
+complement Cayley support and compares its rank with a sparse-transversal lower
+bound.  The same matrix yields left and right translate covers with at most
+$2^n$ translates and shows that equality forces the uncovered set to be a
+subgroup coset of index $2^n$.  For compatible blocks of $b_j$ left or right
+cosets of a common subgroup, a univariate detector of rank at most $b_j+1$
+gives the sharper denominator $\prod_j(b_j+1)$, with corresponding
+translate-cover and equality statements.  We record sharp examples and several
+compact consequences.
+\end{abstract}
+\maketitle
+
+\section{Introduction and statement of the problem}
+
+Problem 21.115 first appeared in the official version 39 of the 21st
+\emph{Kourovka Notebook}, dated 8 January 2026, on printed page 178
+\cite[p.~178]{Kourovka21v39}.  It is attributed there to B.~Sambale and asks:
+
+\begin{quote}
+Let $C_1,\ldots,C_n$ be (left or right) cosets of a finite group $G$ such that
+$U=C_1\cup\cdots\cup C_n$ is not $G$.  Is it always true that
+$|G\setminus U|\ge |G|/2^n$?
+\end{quote}
+
+The wording permits the orientation to be chosen independently for each coset;
+the underlying subgroups may differ and need not be normal.  In the current
+checked version 45, dated 3 July 2026, the problem appears on printed page 181
+with unchanged wording and no solution annotation \cite[p.~181]{Kourovka21v45}.
+The same bound had been formulated conjecturally by Sambale and
+T\u{a}rn\u{a}uceanu, who proved a general $|G|/(2n!)$ lower bound and the desired
+estimate in several special cases \cite{SambaleTarnauceanu2022}.
+
+Our main result is the exact affirmative answer.
+
+\begin{theorem}[Mixed-coset complement bound]\label{thm:main}
+Let $n\ge 1$, let $G$ be a finite group, and let $C_1,\ldots,C_n$ be sets such
+that each $C_i$ is a left or right coset of a subgroup of $G$.  The orientations,
+subgroups, and repetitions may be arbitrary.  If
+\[
+  A:=G\setminus\bigcup_{i=1}^n C_i\ne\varnothing,
+\]
+then
+\[
+  |A|\ge \frac{|G|}{2^n}.
+\]
+Equivalently, $|A|\ge\lceil |G|/2^n\rceil$.
+\end{theorem}
+
+The proof is an exact rank sandwich.  One constructs a matrix $M$ with
+$M(x,y)\ne0$ precisely when $x^{-1}y\in A$, proves $\rank M\le2^n$, and uses
+the support of an actual row basis to prove $\rank M\ge |G|/|A|$.  This also
+produces a nonsingular submatrix whose nonzero entries are all supported on the
+complement relation.
+
+The same argument gives two structural strengthenings.  First, at most $2^n$
+left translates of $A$ cover $G$, and the same is true on the right.  Second,
+equality in \cref{thm:main} forces $A$ to be a subgroup coset of index $2^n$.
+When several forbidden cosets share one subgroup and one orientation, their
+individual rank-two factors can be compressed into a single rank-$(b+1)$
+block.  A targeted search through 2 August 2026 did not locate this exact
+mixed-orientation compatible-block construction or its product-denominator
+consequences; it is therefore presented only as an apparently new application,
+with moderate confidence and no claim of historical priority.
+
+Several ingredients and later consequences have established antecedents.
+Hadamard-rank submultiplicativity is standard
+\cite[Observation~7, p.~587]{Johnson1978} and \cite[Proposition~2, p.~27]{ArvindJoglekarSrinivasan2009}; the sparse
+support lemmas below are convenient elementary formulations of basis and minor
+facts, with close support--dimension analogues in permutation modules
+\cite{GoldsteinGuralnickIsaacs2005}.  The binary subgroup-chain example is a
+special case of Sun's exact-cover construction \cite[Example~1.2]{Sun2001}; see also \cite{Sun2006}.
+The exact-support parameter used in the appendix is the Cayley specialization
+of established zero-pattern and nondeterministic-rank notions
+\cite{HershkowitzSchneider1993,DeWolf2000}.  The finite-index and profinite
+statements are routine quotient transfers.  None of these observations is a
+priority certificate for the main theorem or the compatible-block refinement.
+
+Two distinct audited Lean 4/Mathlib certificates verify the headline
+mixed-left/right finite-group complement inequality: an independently written
+Lean 4.30 proof and an Aristotle reconstruction with an audited one-line
+compatibility port to Lean 4.30.  Neither certificate formalizes sharpness,
+translate-cover conclusions, equality rigidity, compatible grouped blocks,
+exact-support rank consequences, prescribed-image applications, or the
+finite-index and profinite extensions.
+
+\subsection*{The 2022 special cases}
+The following facts were already established in
+\cite{SambaleTarnauceanu2022}.  Proposition~2 gives the general estimate
+$|G\setminus\bigcup_iC_i|\ge |G|/(2n!)$.  Proposition~3 proves the target
+$2^{-n}$ estimate for unions of subgroups when $n\le5$, and Lemma~4 reduces the
+nilpotent case to finite $p$-groups.  Theorem~6 gives an optimal formula for
+elementary abelian $p$-groups: if $n=a+b(p-1)$ with $0\le a\le p-2$, then the
+uncovered proportion is at least $(p-a)/p^{b+1}$.  The paper also obtains the
+target bound for finite $p$-groups when $n\le2p-2$ and for cyclic groups.  The
+argument below is different and treats arbitrary finite groups and arbitrary
+mixed left/right subgroup cosets.
+
+\section{Two elementary rank lemmas}
+
+All ranks are ordinary matrix ranks over the stated field.  If matrices have
+the same shape, $B\Had D$ denotes their entrywise, or Hadamard, product.
+
+\begin{lemma}[Hadamard-rank inequality]\label{lem:hadamard-rank}
+Let $s\ge1$, and let $B_1,\ldots,B_s$ be matrices of the same finite shape over a field $\F$.
+Then
+\[
+  \rank(B_1\Had\cdots\Had B_s)\le\prod_{i=1}^s\rank B_i.
+\]
+\end{lemma}
+
+\begin{proof}
+Write $B_i=\sum_{j=1}^{r_i}u_{ij}v_{ij}^{\mathsf T}$, where
+$r_i=\rank B_i$.  Distributing the entrywise product expresses
+$B_1\Had\cdots\Had B_s$ as a sum of $\prod_i r_i$ outer products, since
+\[
+ (u_1v_1^{\mathsf T})\Had\cdots\Had(u_sv_s^{\mathsf T})
+ =(u_1\Had\cdots\Had u_s)(v_1\Had\cdots\Had v_s)^{\mathsf T}.
+\]
+Each summand has rank at most one.  This is the standard Hadamard-rank bound;
+see also \cite[Observation~7, p.~587]{Johnson1978} and
+\cite[Proposition~2, p.~27]{ArvindJoglekarSrinivasan2009}.
+\end{proof}
+
+\begin{lemma}[Sparse transversal and supported minor]\label{lem:sparse}
+Let $B$ be an $N\times N$ matrix over a field, where $N>0$.  Suppose every row
+has at most $m$ nonzero entries and there is a permutation $\pi$ of the column
+set such that $B(x,\pi(x))\ne0$ for every row $x$.  Then, writing
+$r=\rank B$,
+\[
+  N\le mr.
+\]
+Moreover, $r$ actual row supports cover all columns, $r$ actual column supports
+cover all rows, and there are actual row and column index sets $X,Y$ with
+$|X|=|Y|=r$ such that $B[X,Y]$ is nonsingular.
+\end{lemma}
+
+\begin{proof}
+Choose $r$ actual rows forming a basis of the row space.  If a column vanished
+on those rows, it would vanish on every row.  This is impossible because the
+transversal supplies a nonzero entry in every column.  Thus the basis-row
+supports cover all $N$ columns, and $N\le mr$.  Applying the same argument to
+columns gives the transposed support-cover assertion.  Finally, the $r\times N$
+matrix formed by the basis rows has row rank $r$, so it has $r$ pivot columns;
+the corresponding $r\times r$ submatrix is nonsingular.
+\end{proof}
+
+In particular, a square matrix with nonzero diagonal and at most $m$ nonzeros
+per row has rank at least $N/m$.  These statements are elementary basis and
+rank--minor facts; they are recorded in this form only because every part is
+used below.
+
+\section{The rank-two detector and the proof}
+
+\subsection{Orientation and normalization}
+For every subgroup $H\le G$ and $a\in G$,
+\[
+  Ha=a(a^{-1}Ha).
+\]
+Indeed, both sets consist of the elements $ha$ with $h\in H$.  Hence every
+right coset is a left coset of a conjugate subgroup, and this conversion may be
+made independently for each $C_i$.  We may write
+$C_i=a_iH_i$ without assuming that any $H_i$ is normal.
+
+Choose $g_0\in A$ and left-translate the entire configuration by $g_0^{-1}$.
+Each $a_iH_i$ remains a left coset, cardinalities are unchanged, and the
+translated complement contains the identity.  After renaming, we assume
+\[
+  e\in A,\qquad C_i=a_iH_i,\qquad a_i\notin H_i.
+\]
+The last condition is equivalent to $e\notin a_iH_i$.
+
+\subsection{One forbidden coset}
+Regard $G/H_i$ only as the finite set of left cosets and choose an injection
+$\lambda_i:G/H_i\to\Q$.  Define a $G\times G$ matrix by
+\[
+  M_i(x,y)=\lambda_i(yH_i)-\lambda_i(xa_iH_i).
+\]
+Writing $\alpha_i(y)=\lambda_i(yH_i)$ and
+$\beta_i(x)=\lambda_i(xa_iH_i)$ shows that
+$M_i(x,y)=\alpha_i(y)-\beta_i(x)$, the difference of two outer products;
+therefore $\rank M_i\le2$.  Injectivity gives the exact zero pattern
+\[
+\begin{aligned}
+ M_i(x,y)=0
+ &\Longleftrightarrow yH_i=xa_iH_i\\
+ &\Longleftrightarrow x^{-1}y\in a_iH_i=C_i.
+\end{aligned}
+\]
+No quotient-group operation is used.  In particular, $M_i(x,x)\ne0$ because
+$e\notin C_i$.
+
+\subsection{The complement matrix}
+Set
+\[
+  M=M_1\Had\cdots\Had M_n.
+\]
+Since $\Q$ has no zero divisors,
+\[
+  M(x,y)\ne0
+  \Longleftrightarrow x^{-1}y\notin C_i\ \text{for every }i
+  \Longleftrightarrow x^{-1}y\in A.                 \tag{3.1}\label{eq:support}
+\]
+Thus row $x$ has support $xA$ and exactly $|A|$ nonzero entries, while every
+diagonal entry is nonzero.  By Lemma~\ref{lem:hadamard-rank},
+$\rank M\le2^n$.  Equivalently, direct expansion gives
+\[
+ M(x,y)=\sum_{S\subseteq[n]}(-1)^{|S|}
+ \left(\prod_{i\in S}\beta_i(x)\right)
+ \left(\prod_{i\notin S}\alpha_i(y)\right),       \tag{3.2}\label{eq:expansion}
+\]
+a sum of $2^n$ outer products.
+
+Apply Lemma~\ref{lem:sparse} with the diagonal transversal.  With $N=|G|$ and
+$m=|A|$,
+\[
+  \frac{|G|}{|A|}\le\rank M\le2^n,
+\]
+which proves \cref{thm:main} in the normalized configuration.  Undoing the
+left translation preserves $|A|$ and completes the proof.
+
+The same lemma supplies an explicit internal certificate: there are
+$X,Y\subseteq G$ with $|X|=|Y|=\rank M$ such that $M[X,Y]$ is nonsingular.
+Every nonzero entry of this minor satisfies $x^{-1}y\in A$ by
+\cref{eq:support}.  The minor is not asserted to be principal or to equal
+$M[A,A]$.
+
+\section{Translate covers and equality}
+
+For a nonempty subset $A\subseteq G$, define
+\[
+ \tau_L(A)=\min\{|T|:T\subseteq G,\ TA=G\},\qquad
+ \tau_R(A)=\min\{|T|:T\subseteq G,\ AT=G\}.
+\]
+
+\begin{theorem}[Two-sided translate covers]\label{thm:translate}
+Under the hypotheses of \cref{thm:main},
+\[
+  \tau_L(A)\le2^n,\qquad \tau_R(A)\le2^n.
+\]
+More precisely, in the normalized construction both numbers are at most
+$\rank M$.
+\end{theorem}
+
+\begin{proof}
+Let $x_1,\ldots,x_r$ index actual basis rows of $M$, where $r=\rank M$.
+Their supports cover all columns by Lemma~\ref{lem:sparse}; by
+\cref{eq:support}, these supports are $x_1A,\ldots,x_rA$.  Hence
+$G=\bigcup_{j=1}^r x_jA$.
+
+For fixed $y$, the support of column $y$ is
+\[
+  \{x:x^{-1}y\in A\}=yA^{-1}.
+\]
+Actual basis columns therefore give $G=\bigcup_j y_jA^{-1}$; taking inverses
+gives $G=\bigcup_j Ay_j^{-1}$.  Since $r\le2^n$, the normalized bounds follow.
+If $A'=g_0^{-1}A$ is the normalized complement, then
+$TA'=G$ implies $(Tg_0^{-1})A=G$, while $A'T'=G$ implies $AT'=G$.
+\end{proof}
+
+As a counting certificate, choose one representation $g=t(g)a(g)$ from a left
+cover $TA=G$.  Then $g\mapsto(t(g),a(g))$ injects $G$ into $T\times A$.
+
+\begin{theorem}[Equality rigidity]\label{thm:equality}
+Under the hypotheses of \cref{thm:main}, if $|A|=|G|/2^n$, then $A$ is a
+subgroup coset of index $2^n$.  After normalization by a point of $A$, the
+complement itself is a subgroup.
+\end{theorem}
+
+\begin{proof}
+Work in the normalized setting $e\in A$ and put $m=|A|$, $N=|G|$.  Equality
+forces
+\[
+  \rank M=2^n=N/m.
+\]
+Any basis of actual rows has $N/m$ supports, each of size $m$, covering $G$.
+Their total size is $N$, so they are pairwise disjoint.
+
+Suppose rows indexed by $x,y$ have overlapping supports.  If they were
+independent, then, because the actual rows span the row space, they could be
+extended to a basis of actual rows, contradicting the preceding disjointness.
+The two rows are therefore dependent; neither is zero, so they are proportional
+and have equal supports.  Consequently
+\[
+  xA\cap yA\ne\varnothing\quad\Longrightarrow\quad xA=yA. \tag{4.1}\label{eq:disjoint-equal}
+\]
+Let $H=\{g\in G:gA=A\}$.  If $a\in A$, then $a\in A\cap aA$ because
+$e\in A$, and \cref{eq:disjoint-equal} gives $aA=A$; hence $A\subseteq H$.
+Conversely, $h\in H$ implies $h=he\in hA=A$, so $H\subseteq A$.  Thus
+$A=H$ is a subgroup.  Undoing normalization makes the original complement a
+left coset of $H$, and $[G:H]=|G|/|A|=2^n$.
+\end{proof}
+
+\begin{remark}\label{rem:family-open}
+\Cref{thm:equality} classifies the uncovered set, not the covering family.
+Classification of all families of $n$ left or right subgroup cosets whose union
+is the complement of a subgroup coset of index $2^n$ remains open.
+\end{remark}
+
+\section{Compatible blocks}
+
+\begin{definition}\label{def:block}
+A compatible block of size $b\ge1$ is either $b$ left cosets
+$a_1H,\ldots,a_bH$ of one subgroup $H$, or $b$ right cosets
+$Ha_1,\ldots,Ha_b$ of one subgroup $H$.  A compatible block partition is a
+partition of the given coset family into such blocks.
+\end{definition}
+
+\begin{lemma}[Rank-$(b+1)$ block detector]\label{lem:block}
+Every compatible block of size $b$ admits a rational matrix of rank at most
+$b+1$ whose zeros are exactly the pairs $(x,y)$ for which $x^{-1}y$ lies in
+one of the cosets in that block.
+\end{lemma}
+
+\begin{proof}
+For a left block $a_1H,\ldots,a_bH$, choose an injection
+$\lambda:G/H\to\Q$ and define
+\[
+  L_H(x,y)=\prod_{j=1}^b
+  \bigl(\lambda(yH)-\lambda(xa_jH)\bigr).
+\]
+The $j$th factor vanishes exactly when $x^{-1}y\in a_jH$.  Expanding as a
+polynomial of degree $b$ in the single column variable $t=\lambda(yH)$ gives
+$L_H(x,y)=\sum_{r=0}^b u_r(x)t^r$, a sum of $b+1$ outer products.  Hence
+$\rank L_H\le b+1$.
+
+For a right block $Ha_1,\ldots,Ha_b$, choose an injection $\mu:G/H\to\Q$ and
+put
+\[
+  R_H(x,y)=\prod_{j=1}^b
+  \bigl(\mu(xH)-\mu(ya_j^{-1}H)\bigr).
+\]
+Here
+\[
+  x^{-1}y\in Ha_j
+  \Longleftrightarrow x^{-1}ya_j^{-1}\in H
+  \Longleftrightarrow ya_j^{-1}H=xH.
+\]
+Thus the zero set is again exact, and expansion in the single row variable
+$u=\mu(xH)$ gives rank at most $b+1$.
+\end{proof}
+
+\begin{theorem}[Compatible-block refinement]\label{thm:grouped}
+Suppose $t\ge1$ and the forbidden cosets have a compatible block partition
+$\mathcal B_1,\ldots,\mathcal B_t$, where $b_j=|\mathcal B_j|$, and set
+\[
+  R=\prod_{j=1}^t(b_j+1).
+\]
+If $A=G\setminus\bigcup_iC_i$ is nonempty, then
+\[
+  |A|\ge\frac{|G|}{R},\qquad
+  \tau_L(A)\le R,\qquad \tau_R(A)\le R.
+\]
+If $|A|=|G|/R$, then $A$ is a subgroup coset of index $R$.
+\end{theorem}
+
+\begin{proof}
+Take one matrix from Lemma~\ref{lem:block} for each block and form their Hadamard
+product $B$.  Its exact support is
+$B(x,y)\ne0\Longleftrightarrow x^{-1}y\in A$, and
+$\rank B\le R$ by Lemma~\ref{lem:hadamard-rank}.  Choose $z\in A$.  The entries
+$B(x,xz)$ form a nonzero permutation transversal, and each row has exactly
+$|A|$ nonzeros.  Hence Lemma~\ref{lem:sparse} gives
+$|G|\le |A|\rank B\le |A|R$.  Its row- and column-support conclusions give
+the two translate-cover bounds as in \cref{thm:translate}.
+
+If equality holds, then $\rank B=R=|G|/|A|$.  The proof of
+\cref{thm:equality}, using the supports $xA$, applies verbatim after translating
+one element of $A$ to the identity.  Thus $A$ is a subgroup coset of index $R$.
+\end{proof}
+
+Singleton blocks recover $R=2^n$, while a block of size $b\ge2$ replaces
+$2^b$ by the smaller factor $b+1$.  Repeated identical cosets may first be
+deleted.  One may minimize $R$ over all compatible block partitions of the
+given description.
+
+\section{Sharpness and equality examples}
+
+The grouped denominator is attained by the standard coordinate-fiber
+construction, familiar from finite-grid and abelian coset-cover arguments
+\cite{AlonFuredi1993,Szegedy2007,LettlSun2008,SambaleTarnauceanu2022}.
+
+\begin{proposition}[Coordinate-fiber sharpness]\label{prop:sharp}
+For every tuple of positive integers $(b_1,\ldots,b_t)$ and every finite group
+$K$, the denominator $R=\prod_j(b_j+1)$ in \cref{thm:grouped} is attained.
+In particular, the constant $2^{-n}$ in \cref{thm:main} is sharp.
+\end{proposition}
+
+\begin{proof}
+Take
+\[
+  G=K\times\prod_{j=1}^t C_{b_j+1}.
+\]
+For coordinate $j$, use the $b_j$ nonzero fibers, each a coset of the
+coordinate-zero subgroup.  Their union misses exactly
+$K\times\{(0,\ldots,0)\}$, which has relative size $1/R$.  Setting every
+$b_j=1$ gives $G=K\times(C_2)^n$ and the sharp constant $2^{-n}$.
+\end{proof}
+
+The next transparent equality family is the index-two specialization of Sun's
+stronger exact-cover construction \cite[Example~1.2, p.~417]{Sun2001}; see also \cite{Sun2006}.  It is
+recorded only to contrast disjoint and overlapping equality mechanisms.
+
+\begin{proposition}[Sun's subgroup-chain example, index-two case]\label{prop:sun-chain}
+Suppose
+\[
+  G=H_0>H_1>\cdots>H_n,\qquad [H_{j-1}:H_j]=2,
+\]
+and choose $a_j\in H_{j-1}\setminus H_j$.  Then
+\[
+  G\setminus H_n=\bigsqcup_{j=1}^n a_jH_j.
+\]
+Thus these $n$ cosets attain equality in \cref{thm:main}.
+\end{proposition}
+
+\begin{proof}
+For each $j$, the two left cosets of $H_j$ in $H_{j-1}$ are $H_j$ and
+$a_jH_j$, so $H_{j-1}\setminus H_j=a_jH_j$.  The successive differences are
+disjoint and telescope to $G\setminus H_n$; multiplying the indices gives
+$[G:H_n]=2^n$.
+\end{proof}
+
+The coordinate construction has substantial overlap among the forbidden
+cosets, whereas the subgroup-chain layers are disjoint.  This already rules
+out any equality-family classification based only on one of those two patterns.
+
+\appendix
+\section{Compact consequences}
+
+\subsection{An abstract rank-support formulation}
+For convenience we combine the two standard rank facts above in one form.
+
+\begin{theorem}[Rank-support incidence principle]\label{thm:abstract}
+Let $X$ and $Y$ be finite sets of the same positive size $N$, let $s\ge1$, and
+for $1\le i\le s$ let $B_i$ be an $X\times Y$ matrix over a field $\F$ with
+$\rank B_i\le r_i$.  Set $B=B_1\Had\cdots\Had B_s$.  Suppose every row of
+$B$ has at most $m$ nonzeros and there is a bijection $\pi:X\to Y$ with
+$B(x,\pi(x))\ne0$ for all $x$.  Then
+\[
+  N\le m\rank B\le m\prod_{i=1}^s r_i.
+\]
+At most $\prod_i r_i$ actual row supports cover $Y$, and at most
+$\prod_i r_i$ actual column supports cover $X$.
+\end{theorem}
+
+\begin{proof}
+Apply Lemmas~\ref{lem:hadamard-rank} and~\ref{lem:sparse}.  The transversal forces $m\ge1$
+and $\rank B>0$, so no empty-product convention is involved.
+\end{proof}
+
+\subsection{Cayley exact-support rank}
+Exact zero--nonzero pattern rank was studied before the present setting
+\cite{HershkowitzSchneider1993}.  De Wolf's nondeterministic rank minimizes
+complex rank over matrices nonzero exactly on the $1$-inputs of a Boolean
+function \cite{DeWolf2000}; the following is its Cayley-support specialization,
+with an arbitrary ground field.  Unlike graph or Haemers minrank conventions, every position allowed by the
+support relation is required to be nonzero; this distinction is discussed in
+\cite{DeaettYoung2026}.
+
+\begin{definition}\label{def:mr}
+For a nonempty subset $A$ of a finite group $G$ and a field $\F$, define
+\[
+ \mr_{\F}(A)=\min\{\rank B:
+ B(x,y)\ne0\Longleftrightarrow x^{-1}y\in A\},
+\]
+where rows and columns are indexed by $G$.
+\end{definition}
+
+Row and column permutations show that
+$\mr_{\F}(sA)=\mr_{\F}(A)=\mr_{\F}(At)$ for all $s,t\in G$.
+
+\begin{theorem}[Exact-support bounds and equality]\label{thm:mr}
+Let $A$ be a nonempty subset of a finite group $G$.
+\begin{enumerate}[label=(\alph*)]
+\item For every field $\F$, $\mr_{\F}(A)\ge |G|/|A|$.
+\item Equality holds if and only if $A$ is a subgroup coset.
+\item If $G\setminus A$ is a union of $n$ left or right subgroup cosets, then
+      $\mr_{\Q}(A)\le2^n$.  A compatible block partition with denominator
+      $R$ gives $\mr_{\Q}(A)\le R$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Choose an exact-support matrix $B$ of rank $\mr_{\F}(A)$.  For any
+$a\in A$, it has the nonzero transversal $(x,xa)$ and exactly $|A|$
+nonzeros in every row, proving (a) by Lemma~\ref{lem:sparse}.  If equality holds,
+every actual row basis of $B$ has
+$|G|/|A|$ supports of size $|A|$ covering $G$, so those supports are disjoint.
+The disjoint-or-equal and stabilizer argument in \cref{thm:equality} then shows,
+after translating one element of $A$ to the identity, that $A$ is a subgroup
+coset.  Conversely, if $A=aH$, the $0$--$1$ exact-support matrix has as its
+distinct rows the indicators of the left cosets of $H$; those disjoint nonzero
+rows have rank $[G:H]=|G|/|A|$ over every field.  Part (c) is supplied by the
+detectors in \cref{thm:main,thm:grouped}.
+\end{proof}
+
+Part (a) is the elementary sparse-transversal bound.  No historical novelty is
+claimed for the equality characterization in (b); its priority in the full
+arbitrary-completion setting remains unresolved.  The upper bounds in (c) are
+detector-derived applications not located in the targeted search.  Related
+support--dimension inequalities and subgroup-coset equality phenomena for
+orbit-generated or convolutional matrices appear in
+\cite{GoldsteinGuralnickIsaacs2005,BorelloWillemsZini2022,ChenFanLuo2025}, but
+those results do not automatically apply to an arbitrary exact-support
+completion.
+
+For any nonempty $A\subseteq G$, let $\kappa_G(A)$ be the minimum number of
+left or right subgroup cosets whose union is $G\setminus A$, with the
+empty-family convention $\kappa_G(G)=0$.  If $A=G$, then
+$\mr_{\Q}(G)=1$ and $\kappa_G(G)=0$.  Otherwise
+\cref{thm:mr}(c) gives the immediate obstruction
+\[
+  \kappa_G(A)\ge\left\lceil\log_2\mr_{\Q}(A)\right\rceil.
+\]
+
+\subsection{Prescribed images and derangements}
+Let a finite group $G$ act on a finite set $\Omega$, and fix pairs
+$(p_i,q_i)\in\Omega^2$ for $1\le i\le n$.  For $n=0$ the avoiding set is
+$G$ and all conclusions below are immediate, so assume $n\ge1$.  Each nonempty fiber
+$\{g:gp_i=q_i\}$ is a left coset of the stabilizer $G_{p_i}$.
+Consequently the set
+\[
+  D=\{g\in G:gp_i\ne q_i\text{ for every }i\}
+\]
+is empty or satisfies
+\[
+  |D|\ge |G|/2^n,\qquad \tau_L(D),\tau_R(D)\le2^n.
+\]
+If the nonempty constraints are grouped by source point and source $p_j$ has
+$b_j$ distinct reachable forbidden images, then $2^n$ may be replaced by
+$\prod_j(b_j+1)$.  These are direct point-stabilizer applications, not
+independent permutation-group methods.
+
+For derangements, put
+$\Der(G,\Omega)=\{g:gp\ne p\text{ for every }p\in\Omega\}$.  If
+$\Omega=\varnothing$, then $\Der(G,\Omega)=G$ directly and the bound and
+one-translate covers hold with $2^{|\Omega|}=1$.  If $\Omega\ne\varnothing$,
+the preceding result gives either an empty derangement set or
+\[
+  |\Der(G,\Omega)|\ge |G|/2^{|\Omega|},\qquad
+  \tau_L(\Der),\tau_R(\Der)\le2^{|\Omega|}.
+\]
+For a nontrivial transitive action of degree $d$ and permutation rank $r$,
+Cameron and Cohen proved the substantially stronger estimate
+\[
+  \frac{|\Der(G,\Omega)|}{|G|}\ge\frac{r-1}{d}\ge\frac1d,
+\]
+which is strictly stronger than $2^{-d}$ for $d\ge2$
+\cite[p.~136]{CameronCohen1992}; see also later refinements in
+\cite{BarbieriSpiga2024}.  The present statement is recorded only for
+its uniform prescribed-image formulation.
+
+\subsection{Finite-index and profinite transfers}
+The common-normal-core mechanism for finite unions of mixed left and right
+finite-index cosets is standard; compare the classical coset-cover framework
+of \cite{Neumann1954} and the explicit common-core treatment in Button
+\cite[Propositions~2.4--2.6]{Button2015}.
+
+\begin{proposition}\label{prop:finite-index}
+Let $G$ be any group, let $n\ge1$, and let $C_1,\ldots,C_n$ be left or right cosets of
+finite-index subgroups.  Suppose
+$A=G\setminus\bigcup_iC_i$ is nonempty.  There is a finite-index normal
+subgroup $N\triangleleft G$ such that $A$ is a union of $N$-cosets and
+\[
+  \frac{|A/N|}{|G/N|}\ge2^{-n},
+\]
+where $A/N$ denotes the image of $A$ in $G/N$.
+Moreover $G=T_LA=AT_R$ for finite sets $T_L,T_R$ with
+$|T_L|,|T_R|\le2^n$.  A compatible block denominator $R$ replaces $2^n$ when
+available.
+\end{proposition}
+
+\begin{proof}
+Let $H_i$ be the subgroup underlying $C_i$ and set
+$N=\bigcap_i\core_G(H_i)$, where
+$\core_G(H_i)=\bigcap_{g\in G}gH_ig^{-1}$.  Each core, and hence $N$, is
+finite-index normal.  Since $N\le H_i$, every $C_i$ and $A$ are full inverse
+images of sets in the finite quotient $G/N$, with the original left or right
+orientation retained.  Apply \cref{thm:main,thm:translate,thm:grouped} in the
+quotient and lift representatives of the finite left and right translate
+covers.
+\end{proof}
+
+If $G$ is profinite and the $C_i$ are cosets of open subgroups, the same $N$ is
+open normal.  The complement is clopen and descends to the finite quotient;
+normalized Haar measure is the quotient proportion, a standard profinite fact
+\cite[pp.~24--25]{Segal2007}.  Therefore a nonempty complement satisfies
+$\mu(A)\ge2^{-n}$ and has left and right translate-cover number at most $2^n$,
+with the compatible-block denominator $R$ available as before.  These infinite
+and profinite statements are routine transfers of the finite constants.
+
+\section{Computation and open questions}
+
+The proof is independent of computation.  The accompanying exact verifier uses
+explicit multiplication tables and rational Gaussian elimination.  Its fresh
+replay exhausts all families of at most three distinct proper coset sets in
+$C_6$, $S_3$, $D_8$, $Q_8$, and $(C_2)^3$; checks every equality complement in
+that census; verifies a mixed left/right $D_8$ detector and a nonnormal right
+block; and checks grouped sharpness for profiles $(1,1,1)$ and $(2,3)$.  The
+replay examines $29{,}505$ families, including $28{,}773$ proper unions and
+$3{,}070$ equality cases, and ends with all assertions passing.  These finite
+checks are regression tests, not a proof.
+
+\begin{question}[Equality families]
+Classify all equality-achieving families of $n$ left or right subgroup cosets.
+Equivalently, once \cref{thm:equality} identifies the complement as a subgroup
+coset of index $2^n$, classify all $n$-coset representations of its complement.
+\end{question}
+
+\begin{question}[Stability]
+If $|A|$ is only slightly larger than $|G|/2^n$, under what hypotheses must $A$
+be close to a subgroup coset?  Can a quantitative conclusion be extracted from
+near-equality in the support-cover rank argument?
+\end{question}
+
+\begin{question}[Further compression]
+Can compatible blocks, subgroup chains, repeated quotient coordinates, and
+other algebraic dependencies be unified by a canonical exact-support rank
+parameter sharper than $\prod_j(b_j+1)$?
+\end{question}
+
+\section*{Verification and provenance}
+
+DannyExperiments initiated and directed the investigation, selected the problem
+and validation requirements, curated and validated the artifacts, and is the
+human curator and conventional manuscript author of this project.  OpenAI
+GPT-5.6 Pro generated the ordinary-language proof, the strengthened results,
+and the manuscript draft.  OpenAI Codex produced one independent Lean 4
+formalization, coordinated the audit and provenance workflow, and prepared the
+repository and reproducibility infrastructure.  Aristotle produced a second
+independent Lean 4 formalization.
+
+The audited Aristotle-derived Lean 4.30 port and the independent Codex Lean
+4.30 certificate verify only the headline mixed-left/right finite-group
+complement inequality; none of the strengthenings is claimed to be formally
+verified.  No AI system is listed as an author.  The preserved mathematical
+and literature reports are AI-generated audits, not human peer review.  Human
+specialist review has not been obtained.  The documented literature search
+supports only the qualified classification ``apparently new, moderate
+confidence''; absolute historical priority is not claimed.
+
+\printbibliography
+\end{document}

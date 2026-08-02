@@ -1,0 +1,12 @@
+COMMAND: lake build
+RESULT: PASS
+
+ℙ [8475/8476] Built Kourovka21115 (3.7s)
+info: Kourovka21115.lean:224:0: 'Kourovka21115.kourovka_21_115' depends on axioms: [propext, Classical.choice, Quot.sound]
+Build completed successfully (8476 jobs).
+
+COMMAND: rg -n '\bsorry\b|\badmit\b|^[[:space:]]*axiom\b' Kourovka21115.lean
+RESULT: no matches (ripgrep exit status 1)
+
+CUSTOM_AXIOMS: NONE
+SORRY_OR_ADMIT: NONE

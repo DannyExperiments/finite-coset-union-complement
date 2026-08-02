@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this research release, cite it using the metadata below."
+title: "A rank method for complements of finite coset unions"
+type: software
+version: 1.0.0
+repository-code: "https://github.com/DannyExperiments/finite-coset-union-complement"
+authors:
+  - name: "DannyExperiments"
+preferred-citation:
+  type: article
+  title: "A Rank Method for Complements of Finite Coset Unions"
+  authors:
+    - name: "DannyExperiments"
+  year: 2026
+  url: "https://github.com/DannyExperiments/finite-coset-union-complement"
+keywords:
+  - finite groups
+  - cosets
+  - subgroup coverings
+  - matrix rank
+  - Hadamard product

@@ -1,0 +1,65 @@
+KOUROVKA 21.115 VERSION 2.2 — PDF PREFLIGHT
+
+FILE
+manuscript.pdf
+SHA-256: 6c82c218005037974992d9704324df8e17ea9df19e9b5cc79675be0be6cf96e9
+Size: 371572 bytes
+Pages: 9
+Page size: A4, 595.276 x 841.89 points on all pages
+Encryption: none
+Author metadata: empty
+Openable by PyMuPDF: PASS
+Ghostscript nullpage interpretation: PASS
+Poppler text extraction: PASS
+Embedded/subset fonts with Unicode maps: PASS
+Likely scanned: no
+XFA: absent
+Preflight warnings: 0
+
+BUILD-TEXT CHECKS
+Undefined references or citations: 0
+Multiply defined labels: 0
+LaTeX/package/class/pdfTeX warnings: 0
+Biber warnings or errors: 0
+Overfull boxes: 0
+Underfull boxes: 0
+Rerun warnings: 0
+Unresolved extracted-text markers: 0
+Forbidden incorrect lemma labels:
+  Theorem 2.1: 0
+  Theorem 2.2: 0
+  Theorem 5.2: 0
+Existing formalization-status paragraph: present and unchanged
+New Verification and provenance heading: present once
+New headline-only formal-verification limitation: present and legible
+No-AI-author sentence: present and legible
+Qualified “apparently new, moderate confidence” wording: present
+
+RENDERING
+PDFium at 200 DPI: PASS, 9/9 pages, RGB 1654 x 2339 pixels
+Poppler at 200 DPI: PASS, 9/9 pages, RGB 1654 x 2339 pixels
+Three Version 2.2 contact sheets cover pages 1–3, 4–6, and 7–9.
+
+V2.1-TO-V2.2 RENDER COMPARISON
+Pages 1–7: pixel-identical at 200 DPI.
+Pages 8–9: changed only where the new section appears and the bibliography
+consequently reflows.
+Page count: 9 before and after.
+
+PAGE-BY-PAGE VISUAL INSPECTION
+Page 1: PASS — title, abstract, main theorem, margins, links, and footer clean.
+Page 2: PASS — literature and existing formalization-status material clean;
+        Lemmas 2.1 and 2.2 render correctly.
+Page 3: PASS — supported-minor proof, equations, references, and proof symbols clean.
+Page 4: PASS — translate-cover/equality material and Lemma 5.2 heading clean.
+Page 5: PASS — grouped detector, theorem, and sharpness material clean.
+Page 6: PASS — binary-chain and Appendix A material clean; plural lemma call clean.
+Page 7: PASS — exact-support, action, derangement, and finite-index material clean.
+Page 8: PASS — open questions, complete new provenance section, and bibliography
+        opening are legible and unclipped; formal scope is unambiguous.
+Page 9: PASS — bibliography complete, aligned, and unclipped.
+
+No page showed clipping, overlap, broken glyphs, malformed equations, missing
+content, incorrect reference labels, or a material layout defect.
+
+VISUAL_INSPECTION_VERDICT: PASS

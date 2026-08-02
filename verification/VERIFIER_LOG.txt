@@ -1,0 +1,20 @@
+KOUROVKA 21.115 EXACT FINITE SANITY CHECK
+Arithmetic: fractions.Fraction; group laws: explicit multiplication tables
+Status: supplemental only; not used as a substitute for the proof
+
+EXHAUSTIVE {'group': 'C6', 'order': 6, 'subgroups': 4, 'distinct_proper_coset_sets': 11, 'families_examined': 231, 'proper_unions_examined': 220, 'equality_cases': 2, 'minimum_scaled_slack': 0, 'max_n': 3}
+EXHAUSTIVE {'group': 'S3', 'order': 6, 'subgroups': 6, 'distinct_proper_coset_sets': 17, 'families_examined': 833, 'proper_unions_examined': 811, 'equality_cases': 2, 'minimum_scaled_slack': 0, 'max_n': 3}
+EXHAUSTIVE {'group': 'D8', 'order': 8, 'subgroups': 10, 'distinct_proper_coset_sets': 34, 'families_examined': 6579, 'proper_unions_examined': 6450, 'equality_cases': 398, 'minimum_scaled_slack': 0, 'max_n': 3}
+EXHAUSTIVE {'group': 'Q8', 'order': 8, 'subgroups': 6, 'distinct_proper_coset_sets': 18, 'families_examined': 987, 'proper_unions_examined': 914, 'equality_cases': 78, 'minimum_scaled_slack': 0, 'max_n': 3}
+EXHAUSTIVE {'group': 'C2^3', 'order': 8, 'subgroups': 16, 'distinct_proper_coset_sets': 50, 'families_examined': 20875, 'proper_unions_examined': 20378, 'equality_cases': 2590, 'minimum_scaled_slack': 0, 'max_n': 3}
+
+MIXED-ORIENTATION DETECTOR {'group': 'D8', 'raw_orientations': ['L', 'R'], 'raw_coset_sizes': [2, 2], 'survivor_before_normalization': 4, 'complement_size': 4, 'factor_ranks': [2, 2], 'product_rank': 2, 'rank_upper_bound': 4, 'rank_lower_fraction': '8/4', 'minor_order': 2, 'minor_determinant': '12', 'row_translate_cover_size': 2, 'right_translate_cover_size': 2}
+RIGHT-BLOCK DETECTOR {'group': 'D8', 'subgroup_order': 2, 'subgroup_nonnormal': True, 'block_orientation': 'R', 'block_size': 2, 'forbidden_size': 4, 'complement_size': 4, 'block_rank': 3, 'rank_upper_bound': 3, 'survivor_transversal_element': 2, 'zero_pattern_verified': True}
+GROUPED-SHARPNESS {'profile': [1, 1, 1], 'group': 'C2 x C2 x C2', 'order': 8, 'complement_size': 1, 'denominator': 8, 'block_ranks': [2, 2, 2], 'product_rank': 8, 'equality_verified': True}
+GROUPED-SHARPNESS {'profile': [2, 3], 'group': 'C3 x C4', 'order': 12, 'complement_size': 1, 'denominator': 12, 'block_ranks': [3, 4], 'product_rank': 12, 'equality_verified': True}
+
+SUMMARY
+families_examined=29505
+proper_unions_examined=28773
+equality_cases_checked_as_cosets=3070
+all_assertions=PASS
